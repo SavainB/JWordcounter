@@ -1,14 +1,23 @@
 import PyPDF2
+import sys
 
-# f = open("note.txt", "r")
-f = open("example.pdf", "rb")
+with open(sys.argv[1], 'r') as my_file:
+    if my_file.name.endswith('.txt'):
+        print("txt")
+        f = open(my_file.name, "r")
+    elif my_file.name.endswith('.pdf'):
+        print("pdf")
+        f = open(my_file.name, "rb")
+        # creating a pdf reader object
+        fileReader = PyPDF2.PdfFileReader(f)
+        page = fileReader.pages[0]
+        # print the number of pages in pdf file
+        # print(page.extract_text())
+        f = page.extract_text()
+    else:
+        print("putain")
 
-# creating a pdf reader object
-fileReader = PyPDF2.PdfFileReader(f)
-page = fileReader.pages[0]
-# print the number of pages in pdf file
-# print(page.extract_text())
-f = page.extract_text()
+
 number_of_word = 0
 words = []
 summary = []
@@ -30,7 +39,6 @@ def verify(mot):
             return False
     return True
 
-
 for x in words:
     if verify(x) and x != "":
         if x != "":
@@ -41,7 +49,6 @@ for x in words:
         summary.append(x)
         nomber.append(nb)
         nb = 0
-print("Mot trouvers : ", number_of_word)
 number_of_word = 0
 for (i, e) in zip(summary, nomber):
     number_of_word += e
