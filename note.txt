@@ -1,0 +1,6 @@
+python webapp to count unique words and repeat words ( of all major languages ) & provide summary .
+Document formats can be various formats like word , PDFs , Excel etc
+
+If the application can also handle documents that will be great .
+
+This project is a beginners project for a bigger concept th 
